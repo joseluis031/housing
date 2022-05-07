@@ -29,3 +29,5 @@ if __name__ == "__main__":
         print("La mediana de Price es: ",hola.mediana_precio())
         print("El 1 percentil de Price es:",hola.percentiles_precio(25))
         print("El 3 percentil de Price es:",hola.percentiles_precio(75))
+        
+
