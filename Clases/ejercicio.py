@@ -6,6 +6,14 @@ import numpy as np
 class Ejercicio:
     def __init__(self,datos):
         self.datos = pd.read_csv(datos)
+        #Bucle `que me indica si hay datos perdidos o no`
+        for i in self.datos:
+            if i =="":
+                print("Hay datos perdidos")
+                #En caso de haber datos perdidos, los sustituye por ceros
+                self.datos.fillna(0)
+            else:
+                print("No hay datos perdidos")
     def calculo_media(self):
         media = self.datos["Avg. Area Income"].mean()
         return media
@@ -65,6 +73,7 @@ class Ejercicio:
 class Graficas:
     def __init__(self,datos):
         self.datos = pd.read_csv(datos)
+        self.datos = self.datos.dropna()
     def histograma_precios(self):
         fig, ax = plt.subplots()
 # Filtramos los distritos de la lista de distritos dada, después contamos la frecuencias de los tipos de alojamientos y dibujamos el diagrama de sectores
