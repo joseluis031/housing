@@ -73,7 +73,6 @@ class Ejercicio:
 class Graficas:
     def __init__(self,datos):
         self.datos = pd.read_csv(datos)
-        self.datos = self.datos.dropna()
     def histograma_precios(self):
         fig, ax = plt.subplots()
 # Filtramos los distritos de la lista de distritos dada, después contamos la frecuencias de los tipos de alojamientos y dibujamos el diagrama de sectores
@@ -110,8 +109,15 @@ class Graficas:
         plt.savefig('Graficos/histograma_edad.png', bbox_inches='tight')
         return plt.show()
     
+class Correlacion:
+    def __init__(self,datos):
+        self.datos = pd.read_csv(datos)
+    def correlacions(self):
+        correlacion = np.corrcoef(self.datos["Avg. Area House Age"], self.datos["Avg. Area Income"])
+        correlacion2 = np.corrcoef(self.datos["Price"], self.datos["Area Population"])
+        return "{}\n{}".format(correlacion, correlacion2)
+        
     
 hola1 = Graficas("USA_Housing.csv")
-print(hola1.histograma_ingresos())
-print(hola1.histograma_edad())
-print(hola1.histograma_precios())
+hola2 = Correlacion("USA_Housing.csv")
+print(hola2.correlacions())
