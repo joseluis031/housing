@@ -1,7 +1,8 @@
 if __name__ == "__main__":  
-    main = int(input("Que datos quieres ver?(1(calculos faciles) o 2(graficas)):"))
+    main = int(input("Que datos quieres ver?(1(calculos faciles), 2(graficas), 3(correlaciones)):"))
     if main == 1:
         from Clases.ejercicio import Ejercicio
+        
         hola = Ejercicio("USA_Housing.csv")
         print("La media de Area Income es: " ,hola.calculo_media())
         print("La desviacion de Area Income es: ",hola.calculo_desviacion())
@@ -30,4 +31,13 @@ if __name__ == "__main__":
         print("El 1 percentil de Price es:",hola.percentiles_precio(25))
         print("El 3 percentil de Price es:",hola.percentiles_precio(75))
         
-
+    elif main == 2:
+        from Clases.ejercicio import Graficas
+        
+        hola2 = Graficas("USA_Housing.csv")
+        print(hola2.histograma_ingresos())
+        print(hola2.histograma_edad())
+        print(hola2.histograma_precios())
+        
+    
+        
