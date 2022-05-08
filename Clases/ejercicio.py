@@ -127,4 +127,22 @@ class Correlacion:
         print('Correlación Pearson(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='pearson'))
         print('Correlación spearman(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='spearman'))
         print('Correlación kendall(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='kendall')) 
-    
+
+class Mas_cosas:
+    def __init__(self,datos):
+        self.datos = pd.read_csv(datos)
+        
+    def matriz_correlacion(self):
+        # Se renombran las columnas para que sean más descriptivas
+        self.datos.columns = ["Price", "Avg. Area Income", "Avg. Area House Age", "Avg. Area Number of Rooms",
+                        "Avg. Area Number of Bedrooms", "Area Population", "Address"]
+            
+        # Variables numéricas
+        self.datos = self.datos.select_dtypes(include=['float64', 'int'])
+        # Matriz de correlación
+        # ==============================================================================
+        corr_matrix = self.datos.corr(method='pearson')
+        print (corr_matrix)
+
+hola3 = Mas_cosas("USA_Housing.csv")
+print(hola3.cosa())
