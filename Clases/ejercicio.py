@@ -112,12 +112,15 @@ class Graficas:
 class Correlacion:
     def __init__(self,datos):
         self.datos = pd.read_csv(datos)
-    def correlacions(self):
-        correlacion = np.corrcoef(self.datos["Avg. Area House Age"], self.datos["Avg. Area Income"])
-        correlacion2 = np.corrcoef(self.datos["Price"], self.datos["Area Population"])
-        return "{}\n{}".format(correlacion, correlacion2)
-        
+    
+    def correlaciones_edad_ingresos(self):
+        print('Correlación Pearson(Edad/Ingresos): ', self.datos['Avg. Area House Age'].corr(self.datos['Avg. Area Income'], method='pearson'))
+        print('Correlación spearman(Edad/Ingresos): ', self.datos['Avg. Area House Age'].corr(self.datos['Avg. Area Income'], method='spearman'))
+        print('Correlación kendall(Edad/Ingresos): ', self.datos['Avg. Area House Age'].corr(self.datos['Avg. Area Income'], method='kendall')) 
+    
+    
+    
     
 hola1 = Graficas("USA_Housing.csv")
 hola2 = Correlacion("USA_Housing.csv")
-print(hola2.correlacions())
+print(hola2.correlaciones())
