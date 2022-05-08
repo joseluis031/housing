@@ -167,6 +167,5 @@ class Mas_cosas:
         )
 
         ax.tick_params(labelsize = 10)
+        plt.savefig('Graficos/matriz_correlacion.png', bbox_inches='tight')
         return plt.show()
-hola3 = Mas_cosas("USA_Housing.csv")
-print(hola3.matriz_grafica())

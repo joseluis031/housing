@@ -52,5 +52,4 @@ if __name__ == "__main__":
         from Clases.ejercicio import Mas_cosas
         
         hola3 = Mas_cosas("USA_Housing.csv")
-        print(hola3.matriz_correlacion())
-        
+        print(hola3.matriz_grafica())        
