@@ -3,6 +3,8 @@ El link de este repositorio es:[GitHub](https://github.com/joseluis031/housing.g
 
 
 ## 1 - Grafique las variables implicadas de las maneras que crea oportunas.
+Este es el codigo que he utilizado para calcular las medidas que he considerado interesantes y para graficar los graficos que he considerado que tienen mas sentido
+y son mas claros despues de probar todos los tipos posibles
 ```
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -133,6 +135,7 @@ class Graficas:
    Dentro del apartado 1, he incluido un bucle que me comprueba si hay datos perdidos o no.
    Tras realizar la comprobacion se puede ver que no hay datos perdidos, en caso de que si hubiera valores perdidos, los completaria con el valor 0
 ## 3 - Obtenga las correlaciones entre variables y analice si se pueden observar algunas relaciones interesantes.
+Este es el codigo que he utilizado para calcular 3 tipos diferentes de correlacion utilizando las variables de "Price","Area Population","Avg. Area Income" y "Avg. Area House Age"
    ```
    import pandas as pd
 
@@ -159,6 +162,7 @@ class Correlacion:
         print('Correlación kendall(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='kendall')) 
 ```
 ## 4 - Grafique todo lo que considere oportuno.
+He considerado interesante calcular el grafico relacionando todas las variables entre si mediante una matriz de correlacion que mas tarde he graficado
 ```
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -208,7 +212,8 @@ class Mas_cosas:
         return plt.show()
 ```
 ## 5 - (Opcional) Aplique algún tipo de clustering o reducción de dimensionalidad e intente encontrar relaciones entre los datos.
-
+He utilizado un clustering basado en la densidad de las variables que he considerado oportunas.
+He utilizado DBSCAN evita el problema de de identificar formas arbitrarias siguiendo la idea de que, para que una observación forme parte de un cluster, tiene que haber un mínimo de observaciones vecinas dentro de un radio de proximidad y de que los clusters están separados por regiones vacías o con pocas observaciones.
 ```
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -439,3 +444,4 @@ if __name__ == "__main__":
         print(hola4.cluster_ingresos())
         print(hola4.cluster_precio())   
         ```
+Todas las graficas estan guardadas en formato png en una carpeta
