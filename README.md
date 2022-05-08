@@ -443,5 +443,5 @@ if __name__ == "__main__":
         print(hola4.cluster_edad())
         print(hola4.cluster_ingresos())
         print(hola4.cluster_precio())   
-        ```
+```
 Todas las graficas estan guardadas en formato png en una carpeta
