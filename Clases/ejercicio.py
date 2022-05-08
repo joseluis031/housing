@@ -234,7 +234,101 @@ class Clustering:
 
         ax.legend()
         ax.set_title('Clusterings generados por DBSCAN');
+        plt.savefig('Graficos/clustering_precio.png', bbox_inches='tight')
+
         plt.show()
         
 hola5 = Clustering("USA_Housing.csv")
 print(hola5.cluster())
+
+ 
+ 
+# Importamos las librerias necesarias
+import pandas as pd 
+import matplotlib.pyplot as plt 
+import seaborn as sns 
+import plotly as py
+import plotly.io as pio
+import plotly.express as px
+from sklearn.cluster import KMeans
+from sklearn import preprocessing
+from yellowbrick.cluster import KElbowVisualizer
+import warnings
+warnings.filterwarnings("ignore")
+py.offline.init_notebook_mode(connected = True)
+pio.renderers.default='browser'
+class Clustering2:
+    def __init__(self,datos):
+        self.datos = pd.read_csv(datos)
+        self.datos.pop("Address")
+    def clus2(self):
+        # Simulación de datos
+        # ==============================================================================
+        X, y = make_blobs(
+                n_samples    = 300, 
+                n_features   = 2, 
+                centers      = 4, 
+                cluster_std  = 0.60, 
+                shuffle      = True, 
+                random_state = 0
+            )
+
+        fig, ax = plt.subplots(1, 1, figsize=(6, 3.84))
+        ax.scatter(
+            x = X[:, 0],
+            y = X[:, 1], 
+            c = 'white',
+            marker    = 'o',
+            edgecolor = 'black', 
+        )
+        ax.set_title('Datos simulados');
+        # Modelo
+        # ==============================================================================
+        X_scaled = scale(X)
+        modelo_kmeans = KMeans(n_clusters=4, n_init=25, random_state=123)
+        modelo_kmeans.fit(X=X_scaled)
+        # Clasificación con el modelo kmeans
+        # ==============================================================================
+        y_predict = modelo_kmeans.predict(X=X_scaled)
+        # Representación gráfica: grupos originales vs clusters creados
+        # ==============================================================================
+        fig, ax = plt.subplots(1, 2, figsize=(10, 4))
+
+        # Grupos originales
+        for i in np.unique(y):
+            ax[0].scatter(
+                x = X_scaled[y == i, 0],
+                y = X_scaled[y == i, 1], 
+                c = plt.rcParams['Price'].by_key()['color'][i],
+                marker    = 'o',
+                edgecolor = 'black', 
+                label= f"Grupo {i}"
+            )
+            
+        ax[0].set_title('Clusters generados por Kmeans')
+        ax[0].legend();
+
+        for i in np.unique(y_predict):
+            ax[1].scatter(
+                x = X_scaled[y_predict == i, 0],
+                y = X_scaled[y_predict == i, 1], 
+                c = plt.rcParams['Price'].by_key()['color'][i],
+                marker    = 'o',
+                edgecolor = 'black', 
+                label= f"Cluster {i}"
+            )
+            
+        ax[1].scatter(
+            x = modelo_kmeans.cluster_centers_[:, 0],
+            y = modelo_kmeans.cluster_centers_[:, 1], 
+            c = 'black',
+            s = 200,
+            marker = '*',
+            label  = 'centroides'
+        )
+        ax[1].set_title('Clusters generados por Kmeans')
+        ax[1].legend();
+        plt.show()
+        
+hola5 = Clustering2("USA_Housing.csv")
+print(hola5.clus2())      
