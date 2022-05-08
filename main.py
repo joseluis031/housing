@@ -1,5 +1,6 @@
 if __name__ == "__main__":  
-    main = int(input("Que datos quieres ver?(1(calculos faciles), 2(graficas), 3(correlaciones)):"))
+    main = int(input("Que datos quieres ver?(1(calculos faciles), 2(graficas), 3(correlaciones),"
+                     "4(matriz correlacion):"))
     if main == 1:
         from Clases.ejercicio import Ejercicio
         
@@ -46,4 +47,10 @@ if __name__ == "__main__":
         print(hola2.correlaciones_edad_ingresos())
         print (hola2.correlaciones_precio_area())
         print(hola2.correlaciones_precio_ingresos())
+        
+    elif main == 4:
+        from Clases.ejercicio import Mas_cosas
+        
+        hola3 = Mas_cosas("USA_Housing.csv")
+        print(hola3.matriz_correlacion())
         

@@ -144,5 +144,3 @@ class Mas_cosas:
         corr_matrix = self.datos.corr(method='pearson')
         print (corr_matrix)
 
-hola3 = Mas_cosas("USA_Housing.csv")
-print(hola3.cosa())
