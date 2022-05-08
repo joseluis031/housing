@@ -39,6 +39,8 @@ if __name__ == "__main__":
         print(hola1.histograma_ingresos())
         print(hola1.histograma_edad())
         print(hola1.histograma_precios())
+        print(hola1.grafica_dispersion())
+
         
     elif main == 3:
         from Clases.ejercicio import Correlacion
