@@ -33,7 +33,7 @@ if __name__ == "__main__":
         print("El 3 percentil de Price es:",hola.percentiles_precio(75))
         
     elif main == 2:
-        from Clases.ejercicio import Graficas
+        from Clases.graficas import Graficas
         
         hola1 = Graficas("USA_Housing.csv")
         print(hola1.histograma_ingresos())
@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
         
     elif main == 3:
-        from Clases.ejercicio import Correlacion
+        from Clases.correlacion import Correlacion
         
         hola2 = Correlacion("USA_Housing.csv")
         print(hola2.correlaciones_edad_ingresos())
@@ -51,13 +51,13 @@ if __name__ == "__main__":
         print(hola2.correlaciones_precio_ingresos())
         
     elif main == 4:
-        from Clases.ejercicio import Mas_cosas
+        from Clases.correlacion2 import Mas_cosas
         
         hola3 = Mas_cosas("USA_Housing.csv")
         print(hola3.matriz_grafica())     
         
     elif main == 5:
-        from Clases.ejercicio import Clustering
+        from Clases.clustering import Clustering
         
         hola4 = Clustering("USA_Housing.csv")
         print(hola4.cluster_edad())
