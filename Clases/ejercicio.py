@@ -169,3 +169,31 @@ class Mas_cosas:
         ax.tick_params(labelsize = 10)
         plt.savefig('Graficos/matriz_correlacion.png', bbox_inches='tight')
         return plt.show()
+
+from sklearn.datasets import make_blobs
+
+# Gráficos
+# ==============================================================================
+import matplotlib.pyplot as plt
+from matplotlib import style
+style.use('ggplot') or plt.style.use('ggplot')
+
+# Preprocesado y modelado
+# ==============================================================================
+from sklearn.cluster import DBSCAN
+from sklearn.preprocessing import scale
+from sklearn.metrics import silhouette_score
+
+# Configuración warnings
+# ==============================================================================
+import warnings
+warnings.filterwarnings('ignore')
+class Clustering:
+    def __init__(self,datos):
+        self.datos = pd.read_csv(datos)
+    
+    def cluster(self):
+        
+        
+hola5 = Clustering("USA_Housing.csv")
+print(hola5.cluster())
