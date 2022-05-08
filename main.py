@@ -34,10 +34,16 @@ if __name__ == "__main__":
     elif main == 2:
         from Clases.ejercicio import Graficas
         
-        hola2 = Graficas("USA_Housing.csv")
-        print(hola2.histograma_ingresos())
-        print(hola2.histograma_edad())
-        print(hola2.histograma_precios())
+        hola1 = Graficas("USA_Housing.csv")
+        print(hola1.histograma_ingresos())
+        print(hola1.histograma_edad())
+        print(hola1.histograma_precios())
         
-    
+    elif main == 3:
+        from Clases.ejercicio import Correlacion
+        
+        hola2 = Correlacion("USA_Housing.csv")
+        print(hola2.correlaciones_edad_ingresos())
+        print (hola2.correlaciones_precio_area())
+        print(hola2.correlaciones_precio_ingresos())
         

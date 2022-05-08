@@ -69,7 +69,6 @@ class Ejercicio:
         return self.datos["Price"].median() 
     
     
-    
 class Graficas:
     def __init__(self,datos):
         self.datos = pd.read_csv(datos)
@@ -109,6 +108,7 @@ class Graficas:
         plt.savefig('Graficos/histograma_edad.png', bbox_inches='tight')
         return plt.show()
     
+
 class Correlacion:
     def __init__(self,datos):
         self.datos = pd.read_csv(datos)
@@ -128,8 +128,3 @@ class Correlacion:
         print('Correlación spearman(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='spearman'))
         print('Correlación kendall(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='kendall')) 
     
-hola1 = Graficas("USA_Housing.csv")
-hola2 = Correlacion("USA_Housing.csv")
-print(hola2.correlaciones_edad_ingresos())
-print (hola2.correlaciones_precio_area())
-print(hola2.correlaciones_precio_ingresos())
