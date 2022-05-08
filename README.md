@@ -128,7 +128,7 @@ class Graficas:
         ax.set_title('Precios vs Edad vs Ingresos', loc = "center", fontdict = {'fontsize':14, 'fontweight':'bold', 'color':'tab:blue'})
         plt.savefig('Graficos/dispersion_precio_edad_ingresos.png', bbox_inches='tight')
         plt.show()
-        ```
+```
 ## 2 - Identifique si es necesaria una limpieza de datos y/o completar valores perdidos.
    Dentro del apartado 1, he incluido un bucle que me comprueba si hay datos perdidos o no.
    Tras realizar la comprobacion se puede ver que no hay datos perdidos, en caso de que si hubiera valores perdidos, los completaria con el valor 0
@@ -157,7 +157,7 @@ class Correlacion:
         print('Correlación Pearson(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='pearson'))
         print('Correlación spearman(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='spearman'))
         print('Correlación kendall(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='kendall')) 
-        ```
+```
 ## 4 - Grafique todo lo que considere oportuno.
 ```
 import matplotlib.pyplot as plt
@@ -206,7 +206,7 @@ class Mas_cosas:
         ax.tick_params(labelsize = 10)
         plt.savefig('Graficos/matriz_correlacion.png', bbox_inches='tight')
         return plt.show()
-        ```
+```
 ## 5 - (Opcional) Aplique algún tipo de clustering o reducción de dimensionalidad e intente encontrar relaciones entre los datos.
 
 ```
