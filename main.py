@@ -1,6 +1,6 @@
 if __name__ == "__main__":  
     main = int(input("Que datos quieres ver?(1(calculos faciles), 2(graficas), 3(correlaciones),"
-                     "4(matriz correlacion):"))
+                     "4(matriz correlacion),5(Clustering):"))
     if main == 1:
         from Clases.ejercicio import Ejercicio
         
@@ -52,4 +52,12 @@ if __name__ == "__main__":
         from Clases.ejercicio import Mas_cosas
         
         hola3 = Mas_cosas("USA_Housing.csv")
-        print(hola3.matriz_grafica())        
+        print(hola3.matriz_grafica())     
+        
+    elif main == 5:
+        from Clases.ejercicio import Clustering
+        
+        hola4 = Clustering("USA_Housing.csv")
+        print(hola4.cluster_edad())
+        print(hola4.cluster_ingresos())
+        print(hola4.cluster_precio())   
