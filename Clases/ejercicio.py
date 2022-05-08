@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from math import sqrt
 import numpy as np
+import seaborn as sns
 
 class Ejercicio:
     def __init__(self,datos):
@@ -128,6 +129,7 @@ class Correlacion:
         print('Correlación spearman(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='spearman'))
         print('Correlación kendall(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='kendall')) 
 
+
 class Mas_cosas:
     def __init__(self,datos):
         self.datos = pd.read_csv(datos)
@@ -142,5 +144,29 @@ class Mas_cosas:
         # Matriz de correlación
         # ==============================================================================
         corr_matrix = self.datos.corr(method='pearson')
-        print (corr_matrix)
+        print(corr_matrix)
+    def matriz_grafica(self):
+        fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(5, 5))
+        corr_matrix = self.datos.corr(method='pearson')
 
+        sns.heatmap(corr_matrix,
+            annot     = True,
+            cbar      = False,
+            annot_kws = {"size": 8},
+            vmin      = -1,
+            vmax      = 1,
+            center    = 0,
+            cmap      = sns.diverging_palette(20, 220, n=200),
+            square    = True,
+            ax        = ax)
+
+        ax.set_xticklabels(
+            ax.get_xticklabels(),
+            rotation = 45,
+            horizontalalignment = 'right',
+        )
+
+        ax.tick_params(labelsize = 10)
+        return plt.show()
+hola3 = Mas_cosas("USA_Housing.csv")
+print(hola3.matriz_grafica())
