@@ -327,10 +327,7 @@ class Clustering:
             plt.savefig('Graficos/clustering_edad.png', bbox_inches='tight')
             plt.show()
         
-hola5 = Clustering("USA_Housing.csv")
-print(hola5.cluster_edad())
-print(hola5.cluster_ingresos())
-print(hola5.cluster_precio())
+
 
  
  
