@@ -109,7 +109,17 @@ class Graficas:
         plt.savefig('Graficos/histograma_edad.png', bbox_inches='tight')
         return plt.show()
     
-
+    def grafica_dispersion(self):
+        
+        fig, ax = plt.subplots()
+        ax.scatter(self.datos["Price"],self.datos["Avg. Area Income"],self.datos["Avg. Area House Age"])
+        ax.set_title('Precios vs Edad vs Ingresos', loc = "center", fontdict = {'fontsize':14, 'fontweight':'bold', 'color':'tab:blue'})
+        plt.savefig('Graficos/dispersion_precio_edad_ingresos.png', bbox_inches='tight')
+        plt.show()
+        
+hola0 = Graficas("USA_housing.csv")
+print(hola0.grafica_dispersion())
+        
 class Correlacion:
     def __init__(self,datos):
         self.datos = pd.read_csv(datos)
@@ -326,8 +336,3 @@ class Clustering:
             ax.set_title('Clusterings edad');
             plt.savefig('Graficos/clustering_edad.png', bbox_inches='tight')
             plt.show()
-        
-
-
- 
- 
