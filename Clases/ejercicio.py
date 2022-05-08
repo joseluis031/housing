@@ -192,7 +192,7 @@ class Clustering:
     def __init__(self,datos):
         self.datos = pd.read_csv(datos)
         self.datos.pop("Address")
-    def cluster(self):
+    def cluster_precio(self):
         # Escalado de datos
         # ==============================================================================
         X = self.datos.drop(columns='Price').to_numpy()
@@ -233,66 +233,104 @@ class Clustering:
         )
 
         ax.legend()
-        ax.set_title('Clusterings generados por DBSCAN');
+        ax.set_title('Clusterings precios');
         plt.savefig('Graficos/clustering_precio.png', bbox_inches='tight')
-
         plt.show()
+        
+    def cluster_ingresos(self):
+            # Escalado de datos
+            # ==============================================================================
+            X = self.datos.drop(columns='Avg. Area Income').to_numpy()
+            X_scaled = scale(X)
+            
+            # Modelo
+            # ==============================================================================
+            modelo_dbscan = DBSCAN(
+                                eps          = 0.2,
+                                min_samples  = 5,
+                                metric       = 'euclidean',
+                            )
+
+            modelo_dbscan.fit(X=X_scaled)
+
+            # Clasificación
+            # ==============================================================================
+            labels = modelo_dbscan.labels_
+
+            fig, ax = plt.subplots(1, 1, figsize=(4.5, 4.5))
+
+            ax.scatter(
+                x = X[:, 0],
+                y = X[:, 1], 
+                c = labels,
+                marker    = 'o',
+                edgecolor = 'black'
+            )
+
+            # Los outliers se identifican con el label -1
+            ax.scatter(
+                x = X[labels == -1, 0],
+                y = X[labels == -1, 1], 
+                c = 'red',
+                marker    = 'o',
+                edgecolor = 'black',
+                label = 'outliers'
+            )
+
+            ax.legend()
+            ax.set_title('Clusterings ingresos');
+            plt.savefig('Graficos/clustering_ingresos.png', bbox_inches='tight')
+            plt.show()
+            
+    def cluster_edad(self):
+            # Escalado de datos
+            # ==============================================================================
+            X = self.datos.drop(columns='Avg. Area House Age').to_numpy()
+            X_scaled = scale(X)
+            
+            # Modelo
+            # ==============================================================================
+            modelo_dbscan = DBSCAN(
+                                eps          = 0.2,
+                                min_samples  = 5,
+                                metric       = 'euclidean',
+                            )
+
+            modelo_dbscan.fit(X=X_scaled)
+
+            # Clasificación
+            # ==============================================================================
+            labels = modelo_dbscan.labels_
+
+            fig, ax = plt.subplots(1, 1, figsize=(4.5, 4.5))
+
+            ax.scatter(
+                x = X[:, 0],
+                y = X[:, 1], 
+                c = labels,
+                marker    = 'o',
+                edgecolor = 'black'
+            )
+
+            # Los outliers se identifican con el label -1
+            ax.scatter(
+                x = X[labels == -1, 0],
+                y = X[labels == -1, 1], 
+                c = 'red',
+                marker    = 'o',
+                edgecolor = 'black',
+                label = 'outliers'
+            )
+
+            ax.legend()
+            ax.set_title('Clusterings edad');
+            plt.savefig('Graficos/clustering_edad.png', bbox_inches='tight')
+            plt.show()
         
 hola5 = Clustering("USA_Housing.csv")
-print(hola5.cluster())
+print(hola5.cluster_edad())
+print(hola5.cluster_ingresos())
+print(hola5.cluster_precio())
 
  
  
-# Importamos las librerias necesarias
-import pandas as pd 
-import matplotlib.pyplot as plt 
-import seaborn as sns 
-import plotly as py
-import plotly.io as pio
-import plotly.express as px
-from sklearn.cluster import KMeans
-from sklearn import preprocessing
-from yellowbrick.cluster import KElbowVisualizer
-import warnings
-warnings.filterwarnings("ignore")
-py.offline.init_notebook_mode(connected = True)
-pio.renderers.default='browser'
-class Clustering2:
-    def __init__(self,datos):
-        self.datos = pd.read_csv(datos)
-        self.datos.pop("Address")
-    def clus2(self):
-        df = pd.read_csv('USA_Housing.csv')
-        print('Dimensiones del df:', df.shape)
-        #____________________________________________________________
-        # Vamos a sacar informacion sobre los tipos y nulos del df
-        df.drop_duplicates(inplace = True)
-        tab_info=pd.DataFrame(df.dtypes).T.rename(index={0:'tipo de la columna'})
-        tab_info=tab_info.append(pd.DataFrame(df.isnull().sum()).T.rename(index={0:'campos nulos (cant)'}))
-        tab_info=tab_info.append(pd.DataFrame(df.isnull().sum()/df.shape[0]*100).T.
-                                rename(index={0:'campos nulos (%)'}))
-        display(tab_info)
-        #__________________
-        #
-        display(df[:5])
-        df['Price'] = pd.get_dummies(df['Price']).values[:,0]
-        plt.style.use('fivethirtyeight')
-        plt.figure(1 , figsize = (15 , 6))
-        n = 0 
-        for x in ['Price' , 'Avg. Area Income' , 'Avg. Area House Age']:
-            n += 1
-            plt.subplot(1 , 3 , n)
-            plt.subplots_adjust(hspace =0.5 , wspace = 0.5)
-            sns.distplot(df[x] , bins = 20)
-            plt.title('Distplot of {}'.format(x))
-        X = df.copy()
-        X.drop(labels=['Price'], axis=1, inplace=True)
-        X1 = preprocessing.normalize(X)
-        model = KMeans()
-        visualizer = KElbowVisualizer(model, k=(1,12))
-        visualizer.fit(X1)        # Entrenamos con los datos
-        visualizer.show()        # Renderizamos la imagen
-        plt.show()
-        
-hola5 = Clustering2("USA_Housing.csv")
-print(hola5.clus2())      
