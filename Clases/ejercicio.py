@@ -118,9 +118,18 @@ class Correlacion:
         print('Correlación spearman(Edad/Ingresos): ', self.datos['Avg. Area House Age'].corr(self.datos['Avg. Area Income'], method='spearman'))
         print('Correlación kendall(Edad/Ingresos): ', self.datos['Avg. Area House Age'].corr(self.datos['Avg. Area Income'], method='kendall')) 
     
+    def correlaciones_precio_area(self):
+        print('Correlación Pearson(Precio/Area): ', self.datos['Price'].corr(self.datos['Area Population'], method='pearson'))
+        print('Correlación spearman(Precio/Area): ', self.datos['Price'].corr(self.datos['Area Population'], method='spearman'))
+        print('Correlación kendall(Precio/Area): ', self.datos['Price'].corr(self.datos['Area Population'], method='kendall')) 
     
-    
+    def correlaciones_precio_ingresos(self):
+        print('Correlación Pearson(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='pearson'))
+        print('Correlación spearman(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='spearman'))
+        print('Correlación kendall(Precio/Ingresos): ', self.datos['Price'].corr(self.datos['Avg. Area Income'], method='kendall')) 
     
 hola1 = Graficas("USA_Housing.csv")
 hola2 = Correlacion("USA_Housing.csv")
-print(hola2.correlaciones())
+print(hola2.correlaciones_edad_ingresos())
+print (hola2.correlaciones_precio_area())
+print(hola2.correlaciones_precio_ingresos())
