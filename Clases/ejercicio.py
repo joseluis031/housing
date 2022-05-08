@@ -262,72 +262,36 @@ class Clustering2:
         self.datos = pd.read_csv(datos)
         self.datos.pop("Address")
     def clus2(self):
-        # Simulación de datos
-        # ==============================================================================
-        X, y = make_blobs(
-                n_samples    = 300, 
-                n_features   = 2, 
-                centers      = 4, 
-                cluster_std  = 0.60, 
-                shuffle      = True, 
-                random_state = 0
-            )
-
-        fig, ax = plt.subplots(1, 1, figsize=(6, 3.84))
-        ax.scatter(
-            x = X[:, 0],
-            y = X[:, 1], 
-            c = 'white',
-            marker    = 'o',
-            edgecolor = 'black', 
-        )
-        ax.set_title('Datos simulados');
-        # Modelo
-        # ==============================================================================
-        X_scaled = scale(X)
-        modelo_kmeans = KMeans(n_clusters=4, n_init=25, random_state=123)
-        modelo_kmeans.fit(X=X_scaled)
-        # Clasificación con el modelo kmeans
-        # ==============================================================================
-        y_predict = modelo_kmeans.predict(X=X_scaled)
-        # Representación gráfica: grupos originales vs clusters creados
-        # ==============================================================================
-        fig, ax = plt.subplots(1, 2, figsize=(10, 4))
-
-        # Grupos originales
-        for i in np.unique(y):
-            ax[0].scatter(
-                x = X_scaled[y == i, 0],
-                y = X_scaled[y == i, 1], 
-                c = plt.rcParams['Price'].by_key()['color'][i],
-                marker    = 'o',
-                edgecolor = 'black', 
-                label= f"Grupo {i}"
-            )
-            
-        ax[0].set_title('Clusters generados por Kmeans')
-        ax[0].legend();
-
-        for i in np.unique(y_predict):
-            ax[1].scatter(
-                x = X_scaled[y_predict == i, 0],
-                y = X_scaled[y_predict == i, 1], 
-                c = plt.rcParams['Price'].by_key()['color'][i],
-                marker    = 'o',
-                edgecolor = 'black', 
-                label= f"Cluster {i}"
-            )
-            
-        ax[1].scatter(
-            x = modelo_kmeans.cluster_centers_[:, 0],
-            y = modelo_kmeans.cluster_centers_[:, 1], 
-            c = 'black',
-            s = 200,
-            marker = '*',
-            label  = 'centroides'
-        )
-        ax[1].set_title('Clusters generados por Kmeans')
-        ax[1].legend();
+        df = pd.read_csv('USA_Housing.csv')
+        print('Dimensiones del df:', df.shape)
+        #____________________________________________________________
+        # Vamos a sacar informacion sobre los tipos y nulos del df
+        df.drop_duplicates(inplace = True)
+        tab_info=pd.DataFrame(df.dtypes).T.rename(index={0:'tipo de la columna'})
+        tab_info=tab_info.append(pd.DataFrame(df.isnull().sum()).T.rename(index={0:'campos nulos (cant)'}))
+        tab_info=tab_info.append(pd.DataFrame(df.isnull().sum()/df.shape[0]*100).T.
+                                rename(index={0:'campos nulos (%)'}))
+        display(tab_info)
+        #__________________
+        #
+        display(df[:5])
+        df['Price'] = pd.get_dummies(df['Price']).values[:,0]
+        plt.style.use('fivethirtyeight')
+        plt.figure(1 , figsize = (15 , 6))
+        n = 0 
+        for x in ['Price' , 'Avg. Area Income' , 'Avg. Area House Age']:
+            n += 1
+            plt.subplot(1 , 3 , n)
+            plt.subplots_adjust(hspace =0.5 , wspace = 0.5)
+            sns.distplot(df[x] , bins = 20)
+            plt.title('Distplot of {}'.format(x))
+        X = df.copy()
+        X.drop(labels=['Price'], axis=1, inplace=True)
+        X1 = preprocessing.normalize(X)
+        model = KMeans()
+        visualizer = KElbowVisualizer(model, k=(1,12))
+        visualizer.fit(X1)        # Entrenamos con los datos
+        visualizer.show()        # Renderizamos la imagen
         plt.show()
         
 hola5 = Clustering2("USA_Housing.csv")
